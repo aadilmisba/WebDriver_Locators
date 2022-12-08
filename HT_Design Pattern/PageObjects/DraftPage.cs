@@ -29,6 +29,9 @@ namespace HT_Design_Pattern.PageObjects
         public WebDriverWait wait = new WebDriverWait(WebDriver.GetInstance(), TimeSpan.FromSeconds(10));
 
         public IWebElement SendMail => WebDriver.GetInstance().FindElement(By.XPath("//div[text()='Send']"));
+        //WebElement checkSenderMail = (WebElement)Driver.GetInstance().FindElement(By.XPath("//div[@class='aoD hl']"));
+        public IWebElement checkSubject = (WebElement)WebDriver.GetInstance().FindElement(By.CssSelector("input[name=subjectbox]"));
+        public IWebElement checkTextbox = (WebElement)WebDriver.GetInstance().FindElement(By.XPath("//div[@role='textbox']"));
 
         public void DraftMails()
         {
@@ -40,17 +43,7 @@ namespace HT_Design_Pattern.PageObjects
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(DraftMail));
             var DraftMailbutton = new Button(DraftMail);
             DraftMailbutton.Click();
-            // Verifying mail is present in Draft folder.
-            Assert.AreEqual(true, DraftMail.Displayed); 
-
-            //WebElement checkSenderMail = (WebElement)Driver.GetInstance().FindElement(By.XPath("//div[@class='aoD hl']"));
-            WebElement checkSubject = (WebElement)WebDriver.GetInstance().FindElement(By.CssSelector("input[name=subjectbox]"));
-            WebElement checkTextbox = (WebElement)WebDriver.GetInstance().FindElement(By.XPath("//div[@role='textbox']"));
-
-            // Verify the draft content(addressee, subject and body – should be the same as in 3).
-            Assert.AreEqual(checkSubject.GetAttribute("value"), "Testing Subject");
-            Assert.AreEqual(checkTextbox.Text, " Testing Send Email");
-
+   
             //SendMail.Click();
             var SendMailbutton = new Button(SendMail);
             SendMailbutton.Click();

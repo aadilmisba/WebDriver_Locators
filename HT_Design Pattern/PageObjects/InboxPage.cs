@@ -33,11 +33,7 @@ namespace HT_Design_Pattern.PageObjects
 
         public void Compose(string senderMail, string subject, string textbox)
         {
-            senderMail = "aadilmisba3@gmail.com";
-            subject = "Testing Subject";
-            textbox = " Testing Send Email";
-
-            Thread.Sleep(2000);
+            
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(CommposeBoxField));
             var CommposeBox = new Button(CommposeBoxField);
             CommposeBox.Click();

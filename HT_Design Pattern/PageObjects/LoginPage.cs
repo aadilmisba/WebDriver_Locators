@@ -36,23 +36,18 @@ namespace HT_Design_Pattern.PageObjects
         //TODO string senderMail, string subject, string textbox parameter values are not used in function
         public void Login(string username, string password)
         {
-            username = "aadilmuhammadu@gmail.com";
-            password = "Test@123";
             //passing the value from test
             UsernameField.SendKeys(username); 
-            Assert.AreEqual(UsernameField.GetAttribute("value"), username);
             
             var UsernameButton = new Button(NextButton);
             UsernameButton.Click();
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(PasswordField));
             //pass this value from test
             PasswordField.SendKeys(password); 
-            Assert.AreEqual(PasswordField.GetAttribute("value"), password);
+            
             var PasswordButton = new Button(LoginButton);
             PasswordButton.Click();
 
-            //Assert for login is successful
-            Assert.True(MainPage.Displayed, "The login is successful");
 
         }
     }
